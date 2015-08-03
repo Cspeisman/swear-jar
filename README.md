@@ -2,7 +2,9 @@
 
 In order to help [@alishalisha](https://github.com/alishalisha) and I cut back on our use of profanity
 
-This application is React + redux
+This application is React + Redux
+
+...and eventually will be React-Native
 
 ####Getting started
 -----
