@@ -5,10 +5,17 @@ export default class JarTotal extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={baseStyle}>
         <strong>Total: </strong>
+        <br />
         ${this.props.totalCost.toFixed(2)}
       </div>
     );
   }
+}
+
+const baseStyle = {
+  width: '44%',
+  color: 'black',
+  display: 'inline-block',
 }

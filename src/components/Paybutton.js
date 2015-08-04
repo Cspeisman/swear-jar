@@ -10,8 +10,11 @@ export default class PayButton extends React.Component {
 
   render() {
     return (
-      <div style={buttonStyle} onClick={this.incrementSwear.bind(this)}>
-        Tap to Pay!
+      <div>
+        <div style={tapCopy}>Tap the jar everytime you swear.</div>
+        <div style={buttonStyle} onClick={this.incrementSwear.bind(this)}>
+          Tap to Pay!
+        </div>
       </div>
     );
   }
@@ -26,4 +29,9 @@ const buttonStyle = {
   color: 'white',
   textAlign: 'center',
   lineHeight: '200px',
+  margin: '0 auto',
 };
+
+const tapCopy = {
+  paddingBottom: '16px'
+}

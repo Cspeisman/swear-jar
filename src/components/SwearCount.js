@@ -5,10 +5,17 @@ export default class SwearCount extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={baseStyle}>
         <strong>Count: </strong>
+        <br />
         {this.props.count}
       </div>
     );
   }
+}
+
+const baseStyle = {
+  width: '44%',
+  color: 'black',
+  display: 'inline-block',
 }

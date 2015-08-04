@@ -11,12 +11,25 @@ export default class SwearJarApp extends React.Component {
   static propTypes = {swearJar: PropTypes.object.isRequired};
 
   render() {
+    const {swearJar} = this.props
     return (
-      <div>
+      <div style={baseStyle}>
+        <div style={costCopy}>${swearJar.costPerSwear.toFixed(2)} per swear</div>
         <PayButton {...this.props}/>
-        <SwearCount count={this.props.swearJar.count} />
-        <JarTotal totalCost={this.props.swearJar.totalCost} />
+        <SwearCount count={swearJar.count} />
+        <JarTotal totalCost={swearJar.totalCost} />
       </div>
     );
   }
+}
+
+const baseStyle = {
+  color: 'grey',
+  textAlign: 'center',
+  width: '50%',
+  margin: '0 auto',
+}
+
+const costCopy = {
+  paddingBottom: '8px',
 }
