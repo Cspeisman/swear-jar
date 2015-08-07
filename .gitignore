@@ -5,4 +5,4 @@
 /dist
 /.env
 /node-v*
-./.eslintrc
+/.eslintrc
