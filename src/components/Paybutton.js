@@ -30,8 +30,9 @@ const buttonStyle = {
   textAlign: 'center',
   lineHeight: '200px',
   margin: '0 auto',
+  WebkitUserSelect: 'none',
 };
 
 const tapCopy = {
-  paddingBottom: '16px'
-}
+  paddingBottom: '16px',
+};
