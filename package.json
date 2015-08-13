@@ -16,6 +16,7 @@
     "babel-eslint": "^4.0.5",
     "babel-loader": "^5.3.2",
     "babel-plugin-object-assign": "^1.2.1",
+    "bcrypt": "^0.8.5",
     "eslint": "^0.23.0",
     "eslint-plugin-babel": "^1.2.0",
     "eslint-plugin-react": "^3.1.0",
