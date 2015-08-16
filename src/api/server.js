@@ -16,8 +16,10 @@ app.get('/', (req, res) => {
   res.send('hello world');
 });
 
+
 app.post('/user/create', (req, res) => {
   const newUser = new Jar({
+    session: true,
     user: {
       username: req.body.username,
       password: req.body.password,
@@ -37,6 +39,7 @@ app.post('/user/login', (req, res) => {
   user.then(potentialUser => {
     let promise = potentialUser.comparePassword(req.body.password);
     promise.then(response => {
+      potentialUser.session = true;
       if (response) res.send(potentialUser);
       res.send('incorrect password');
     });

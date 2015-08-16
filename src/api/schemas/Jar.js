@@ -9,6 +9,7 @@ const jarSchema = new Schema({
     email: String,
     password: {type: String, required: true},
   },
+  session: Boolean,
   swearsSaid: Array,
   costPerSwear: Number,
   swearCount: Number,
