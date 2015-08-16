@@ -17,7 +17,6 @@ const jarSchema = new Schema({
 
 jarSchema.pre('save', function(next) {
   const user = this.user;
-
   if (!this.isModified('user.password')) return next();
 
   // generate a salt
@@ -33,5 +32,12 @@ jarSchema.pre('save', function(next) {
     });
   });
 });
+
+jarSchema.methods.comparePassword = function(candidatePassword) {
+  bcrypt.compare(candidatePassword, this.password, function(err, res) {
+    if (err) return err;
+    console.log(res);
+  });
+};
 
 export default jarSchema;
