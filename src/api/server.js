@@ -30,9 +30,18 @@ app.post('/user/create', (req, res) => {
   }).then(null, (err) => {
     res.send(err.message);
   });
-
 });
 
+app.post('/user/login', (req, res) => {
+  let user = Jar.findOne({'user.username': req.body.username}).exec();
+  user.then(potentialUser => {
+    let promise = potentialUser.comparePassword(req.body.password);
+    promise.then(response => {
+      if (response) res.send(potentialUser);
+      res.send('incorrect password');
+    });
+  });
+});
 
 app.listen(port, () => {
   console.log('Listening on ' + port);

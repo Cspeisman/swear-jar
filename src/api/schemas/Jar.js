@@ -34,9 +34,11 @@ jarSchema.pre('save', function(next) {
 });
 
 jarSchema.methods.comparePassword = function(candidatePassword) {
-  bcrypt.compare(candidatePassword, this.password, function(err, res) {
-    if (err) return err;
-    console.log(res);
+  return new Promise((resolve, reject) => {
+    bcrypt.compare(candidatePassword, this.user.password, function(err, res) {
+      if (err) reject(err);
+      resolve(res);
+    });
   });
 };
 
