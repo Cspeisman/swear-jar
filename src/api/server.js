@@ -19,12 +19,10 @@ app.get('/', (req, res) => {
 });
 
 app.get('/register-swear', (req, res) => {
-  console.log(req.session);
   if (req.session.session) {
     let query = {'user.username': req.session.username};
     let jar = Jar.findOneAndUpdate(query, {$inc: {swearCount: 1}}).exec();
     jar.then(doc => {
-      console.log(doc);
       res.send(doc);
     });
   } else {
