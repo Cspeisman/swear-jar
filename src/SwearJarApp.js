@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import PayButton from './components/PayButton';
 import SwearCount from './components/SwearCount';
 import JarTotal from './components/JarTotal';
+import Login from './components/Login';
 
 @connect(state => (
   {swearJar: state.swearJar}
@@ -10,14 +11,27 @@ import JarTotal from './components/JarTotal';
 export default class SwearJarApp extends React.Component {
   static propTypes = {swearJar: PropTypes.object.isRequired};
 
-  render() {
-    const {swearJar} = this.props
+  renderLogin() {
+    return <Login />;
+  }
+
+  renderJar(swearJar) {
     return (
       <div style={baseStyle}>
         <div style={costCopy}>${swearJar.costPerSwear.toFixed(2)} per swear</div>
         <PayButton {...this.props}/>
         <SwearCount count={swearJar.count} />
         <JarTotal totalCost={swearJar.totalCost} />
+      </div>
+    );
+  }
+
+  render() {
+    const {swearJar} = this.props
+    const screen = swearJar.user.username ? this.renderJar(swearJar) : this.renderLogin()
+    return (
+      <div>
+        {screen}
       </div>
     );
   }

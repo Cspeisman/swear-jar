@@ -9,13 +9,26 @@ mongoose.connect('mongodb://localhost/swearJars');
 const Jar = mongoose.model('Jar', jarSchema);
 
 const app = express();
+
+// CORS settings from http://enable-cors.org/server_expressjs.html
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 app.use(session({secret: 'someEnvSetting'}));
-app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 const port = process.env.PORT || 5000;
 
 app.get('/', (req, res) => {
-  res.send('hello world');
+  if (req.session.session) {
+    let jar = Jar.findOne({'user.username': req.session.username}).exec();
+    jar.then(doc => res.send(doc));
+  } else {
+    res.send('Please log in!');
+  }
 });
 
 app.get('/register-swear', (req, res) => {
