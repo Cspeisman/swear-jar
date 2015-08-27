@@ -1,11 +1,16 @@
 import React from 'react';
-import {createStore, combineReducers} from 'redux';
+import {createStore, combineReducers, applyMiddleware} from 'redux';
 import {provide} from 'react-redux';
 import * as reducers from './redux/reducers';
 import SwearJarApp from './SwearJarApp';
+import {thunkMiddleware} from './utils/thunkMiddleware';
+
+const createStoreWithMiddleware = applyMiddleware(
+  thunkMiddleware, // lets us dispatch() functions
+)(createStore);
 
 let reducer = combineReducers(reducers);
-let redux = createStore(reducer);
+let redux = createStoreWithMiddleware(reducer);
 
 //  For Debugging
 window.redux = redux;

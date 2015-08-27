@@ -1,14 +1,16 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {requestLogin} from '../redux/commands/SwearJarCommands';
 
 export default class Login extends React.Component {
+  static propTypes = {dispatch: PropTypes.func}
+
   constructor(props) {
     super(props);
     this.state = {username: '', password: ''};
   }
 
   onChange(event) {
-    if (event.currentTarget.name === 'password'){
+    if (event.currentTarget.name === 'password') {
       this.setState({password: event.currentTarget.value});
     } else {
       this.setState({username: event.currentTarget.value});
@@ -16,8 +18,8 @@ export default class Login extends React.Component {
   }
 
   login(e) {
-    e.preventDefault()
-    requestLogin(this.state.username, this.state.password);
+    e.preventDefault();
+    this.props.dispatch(requestLogin(this.state.username, this.state.password));
   }
 
   render() {

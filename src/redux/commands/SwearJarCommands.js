@@ -5,36 +5,43 @@ export function addSwearWord(swearWord) {
   };
 }
 
-export function incrementSwearCount() {
+function incrementSwearCount() {
   return {
     type: 'INCREMENT_SWEAR_COUNT',
   };
 }
 
-export function loginUser(payload) {
-  console.log('foo')
-  return {
-    type: 'FOO',
-    payload
+export function registerSwear() {
+  return dispatch => {
+    return fetch('http://localhost:5000/register-swear')
+    .then(response => console.log(response));
   }
 }
 
+function loginUser(jar) {
+  return {
+    type: 'FOO',
+    jar,
+  };
+}
+
 export function requestLogin(username, password) {
-  fetch('http://localhost:5000/user/login', {
-    method: 'POST',
-    headers: {
-      "Content-type": "application/json"
-    },
-    body: JSON.stringify({
-      username: username,
-      password: password,
-    }),
-  }).then(function(response) {
-    return response.json()
-  }).then(function(json) {
-    loginUser(json)
-  }).catch(err => {
-    console.log('oh no :(')
-    console.log(err)
-  })
+  return dispatch => {
+    return fetch('http://localhost:5000/user/login', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: username,
+          password: password,
+        }),
+      }).then(function(response) {
+        return response.json();
+      }).then(function(json) {
+        dispatch(loginUser(json));
+      }).catch(err => {
+        console.log(err);
+      });
+  };
 }

@@ -9,10 +9,13 @@ import Login from './components/Login';
   {swearJar: state.swearJar}
 ))
 export default class SwearJarApp extends React.Component {
-  static propTypes = {swearJar: PropTypes.object.isRequired};
+  static propTypes = {
+    swearJar: PropTypes.object.isRequired,
+    dispatch: PropTypes.func,
+  };
 
   renderLogin() {
-    return <Login />;
+    return <Login dispatch={this.props.dispatch} />;
   }
 
   renderJar(swearJar) {
@@ -20,15 +23,15 @@ export default class SwearJarApp extends React.Component {
       <div style={baseStyle}>
         <div style={costCopy}>${swearJar.costPerSwear.toFixed(2)} per swear</div>
         <PayButton {...this.props}/>
-        <SwearCount count={swearJar.count} />
+        <SwearCount count={swearJar.swearCount} />
         <JarTotal totalCost={swearJar.totalCost} />
       </div>
     );
   }
 
   render() {
-    const {swearJar} = this.props
-    const screen = swearJar.user.username ? this.renderJar(swearJar) : this.renderLogin()
+    const {swearJar} = this.props;
+    const screen = swearJar.user.username ? this.renderJar(swearJar) : this.renderLogin();
     return (
       <div>
         {screen}
@@ -42,8 +45,8 @@ const baseStyle = {
   textAlign: 'center',
   width: '50%',
   margin: '0 auto',
-}
+};
 
 const costCopy = {
   paddingBottom: '8px',
-}
+};

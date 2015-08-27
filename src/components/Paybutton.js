@@ -5,7 +5,7 @@ export default class PayButton extends React.Component {
   static propTypes = {dispatch: PropTypes.func}
 
   incrementSwear() {
-    this.props.dispatch(SwearJarCommands.incrementSwearCount());
+    this.props.dispatch(SwearJarCommands.registerSwear());
   }
 
   render() {

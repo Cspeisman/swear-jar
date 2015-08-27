@@ -18,4 +18,4 @@ const baseStyle = {
   width: '44%',
   color: 'black',
   display: 'inline-block',
-}
+};
